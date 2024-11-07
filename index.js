@@ -6,6 +6,7 @@ return window.innerWidth <= 768; // Adjusts breakpoint for mobile
 function setIframeHeight() {
 const iframe = document.getElementById("iframe");
 iframe.style.height = isMobileScreen() ? "2300px" : "1600px";
+console.log("SetIfrsmeHeight")  
 }
 setIframeHeight();
 
