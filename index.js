@@ -7,7 +7,7 @@ function isMobileScreen() {
 function setIframeHeight() {
   // Only set height if height hasn't been updated recently by message event
   if (!window.heightSetByMessage) {
-    const iframe = document.getElementByTagName("iframe");
+    const iframe = document.getElementsByTagName("iframe")[0];
     iframe.style.height = isMobileScreen() ? "2300px" : "1600px";
     console.log("setIframeHeight triggered");
   }
@@ -32,7 +32,7 @@ window.addEventListener("message", function (event) {
     console.log("Inside event listener");
     console.log(event);
 
-    const iframe = document.getElementByTagName("iframe");
+    const iframe = document.getElementsByTagName("iframe")[0];
     iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
     console.log("Height updated from message");
 
