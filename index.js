@@ -13,6 +13,14 @@ function setIframeHeight() {
   }
 }
 
+// Adjust section height based on iframe content
+function adjustSectionHeight(newHeight) {
+  const hostingerSection = document.getElementById("iframe").closest("section"); // Select the iframe's parent section
+  if (hostingerSection) {
+    hostingerSection.style.height = `${newHeight}px`;
+  }
+}
+
 // Initial setting of iframe height
 // setIframeHeight();
 
@@ -35,6 +43,7 @@ window.addEventListener("message", function (event) {
     const iframe = document.getElementById("iframe");
     iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
     document.body.style.height = event.data.height[isMobileScreen() ? 1 : 0];
+    adjustSectionHeight(event.data.height[isMobileScreen() ? 1 : 0]);
     console.log("Height updated from message");
 
     // Prevent immediate height reset
