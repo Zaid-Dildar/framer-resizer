@@ -34,6 +34,7 @@ window.addEventListener("message", function (event) {
 
     const iframe = document.getElementById("iframe");
     iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
+    document.body.style.height = event.data.height[isMobileScreen() ? 1 : 0];
     console.log("Height updated from message");
 
     // Prevent immediate height reset
