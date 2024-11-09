@@ -1,13 +1,3 @@
-<iframe
-  id="iframe"
-  src="https://booking-form-beta.vercel.app/"
-  sandbox="allow-same-origin allow-scripts allow-forms allow-modals"
-  scrolling="no"
-  frameborder="0"
-  style="width: 100%; height: 800px; border: none;">
-</iframe>
-
-<script>
 console.log("External script loaded");
 
 function isMobileScreen() {
@@ -69,4 +59,3 @@ window.onload = function () {
     console.warn("Section with ID 'zuhczw' not found.");
   }
 };
-</script>
