@@ -1,3 +1,13 @@
+<iframe
+  id="iframe"
+  src="https://booking-form-beta.vercel.app/"
+  sandbox="allow-same-origin allow-scripts allow-forms allow-modals"
+  scrolling="no"
+  frameborder="0"
+  style="width: 100%; height: 800px; border: none;">
+</iframe>
+
+<script>
 console.log("External script loaded");
 
 function isMobileScreen() {
@@ -14,7 +24,7 @@ function setIframeHeight() {
   }
 }
 
-// Set an initial height for the iframe
+// Initial setting of iframe height
 setIframeHeight();
 
 window.addEventListener("resize", setIframeHeight);
@@ -25,30 +35,38 @@ function resetHeightFlag() {
   }, 1000); // Adjust the delay if necessary
 }
 
-window.addEventListener("message", function (event) {
-  if (event.data.type === "resize-iframe") {
-    const section = document.getElementById("zuhczw");
-    const newHeight = event.data.height[isMobileScreen() ? 1 : 0];
-    console.log("Resizing section to", newHeight);
+// Wait for the DOM to be fully loaded to access the section
+window.onload = function () {
+  const section = document.getElementById("zuhczw");
 
-    // Update iframe height
-    const iframe = document.getElementById("iframe");
-    iframe.style.height = newHeight;
+  if (section) {
+    console.log("Section found:", section);
 
-    // Update section height
-    if (section) {
-      section.style.height = `${newHeight}px`;
-      console.log("Section height updated to:", newHeight);
-    }
+    window.addEventListener("message", function (event) {
+      if (event.data.type === "resize-iframe") {
+        const newHeight = event.data.height[isMobileScreen() ? 1 : 0];
+        console.log("Resizing section to", newHeight);
 
-    // Set flag to prevent immediate reset by resize
-    isHeightUpdatedByMessage = true;
-    resetHeightFlag();
+        // Update iframe height
+        const iframe = document.getElementById("iframe");
+        iframe.style.height = newHeight;
 
-    window.scrollTo({
-      top: 50,
-      behavior: "smooth",
+        // Update section height
+        section.style.height = `${newHeight}px`;
+        console.log("Section height updated to:", newHeight);
+
+        // Set flag to prevent immediate reset by resize
+        isHeightUpdatedByMessage = true;
+        resetHeightFlag();
+
+        window.scrollTo({
+          top: 50,
+          behavior: "smooth",
+        });
+      }
     });
+  } else {
+    console.warn("Section with ID 'zuhczw' not found.");
   }
-});
-
+};
+</script>
