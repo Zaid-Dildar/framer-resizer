@@ -14,7 +14,7 @@ function setIframeHeight() {
 }
 
 // Initial setting of iframe height
-setIframeHeight();
+// setIframeHeight();
 
 // Listen for the resize event
 window.addEventListener("resize", setIframeHeight);
