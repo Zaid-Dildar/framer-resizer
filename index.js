@@ -41,7 +41,7 @@ window.addEventListener("message", function (event) {
     resetHeightSetByMessageFlag();
 
     window.scrollTo({
-      top: 50,
+      top: 0,
       behavior: "smooth",
     });
   }
