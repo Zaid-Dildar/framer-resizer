@@ -20,11 +20,11 @@ setIframeHeight();
 window.addEventListener("resize", setIframeHeight);
 
 // Reset the flag after a short delay
-function resetHeightSetByMessageFlag() {
-  setTimeout(() => {
-    window.heightSetByMessage = false;
-  }, 1000); // Adjust timeout as needed
-}
+// function resetHeightSetByMessageFlag() {
+//   setTimeout(() => {
+//     window.heightSetByMessage = false;
+//   }, 1000); // Adjust timeout as needed
+// }
 
 // Listen for messages from the iframe
 window.addEventListener("message", function (event) {
@@ -38,7 +38,7 @@ window.addEventListener("message", function (event) {
 
     // Prevent immediate height reset
     window.heightSetByMessage = true;
-    resetHeightSetByMessageFlag();
+    // resetHeightSetByMessageFlag();
 
     window.scrollTo({
       top: 0,
