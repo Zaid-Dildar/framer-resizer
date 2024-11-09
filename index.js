@@ -17,7 +17,7 @@ function setIframeHeight() {
 // setIframeHeight();
 
 // Listen for the resize event
-window.addEventListener("resize", setIframeHeight);
+// window.addEventListener("resize", setIframeHeight);
 
 // Reset the flag after a short delay
 // function resetHeightSetByMessageFlag() {
