@@ -1,61 +1,55 @@
+// Log to confirm the script is loaded
 console.log("External script loaded");
 
+// Function to determine mobile screen size
 function isMobileScreen() {
   return window.innerWidth <= 768;
 }
 
-let isHeightUpdatedByMessage = false; // Flag to track if height was set by message
-
+// Set initial iframe height based on screen size
 function setIframeHeight() {
-  if (!isHeightUpdatedByMessage) {
-    const iframe = document.getElementById("iframe");
-    iframe.style.height = isMobileScreen() ? "2300px" : "1600px";
-    console.log("Set iframe height");
-  }
+  const iframe = document.getElementById("iframe");
+  iframe.style.height = isMobileScreen() ? "2300px" : "800px"; // Initial height for testing
+  console.log("Set iframe height");
 }
 
-// Initial setting of iframe height
-setIframeHeight();
-
+// Listen for resize events and messages
 window.addEventListener("resize", setIframeHeight);
 
-function resetHeightFlag() {
+// Function to reset the flag after a short delay
+function resetHeightSetByMessageFlag() {
   setTimeout(() => {
-    isHeightUpdatedByMessage = false;
-  }, 1000); // Adjust the delay if necessary
+    window.heightSetByMessage = false;
+  }, 1000); // Adjust timeout as needed
 }
 
-// Wait for the DOM to be fully loaded to access the section
-window.onload = function () {
-  const section = document.getElementById("zuhczw");
+// Listen for messages from the iframe
+window.addEventListener("message", function (event) {
+  if (event.data.type === "resize-iframe") {
+    const iframe = document.getElementById("iframe");
+    iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
+    console.log("Height updated from message");
 
-  if (section) {
-    console.log("Section found:", section);
+    // Prevent immediate height reset
+    window.heightSetByMessage = true;
+    resetHeightSetByMessageFlag();
 
-    window.addEventListener("message", function (event) {
-      if (event.data.type === "resize-iframe") {
-        const newHeight = event.data.height[isMobileScreen() ? 1 : 0];
-        console.log("Resizing section to", newHeight);
-
-        // Update iframe height
-        const iframe = document.getElementById("iframe");
-        iframe.style.height = newHeight;
-
-        // Update section height
-        section.style.height = `${newHeight}px`;
-        console.log("Section height updated to:", newHeight);
-
-        // Set flag to prevent immediate reset by resize
-        isHeightUpdatedByMessage = true;
-        resetHeightFlag();
-
-        window.scrollTo({
-          top: 50,
-          behavior: "smooth",
-        });
-      }
+    window.scrollTo({
+      top: 50,
+      behavior: "smooth",
     });
-  } else {
-    console.warn("Section with ID 'zuhczw' not found.");
   }
-};
+});
+
+// Send the height adjustment message to the parent (Hostinger)
+function sendHeightToHostingerSection(height) {
+  if (window.parent) {
+    window.parent.postMessage({ type: "resize-hostinger-section", height: height }, "*");
+    console.log("Resizing Hostinger section to", height);
+  } else {
+    console.log("Hostinger section not found.");
+  }
+}
+
+// Trigger the height change
+sendHeightToHostingerSection(1700); // Adjust based on your needs
