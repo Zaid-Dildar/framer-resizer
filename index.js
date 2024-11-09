@@ -30,6 +30,9 @@ window.addEventListener("message", function (event) {
     iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
     console.log("Height updated from message");
 
+// Trigger the height change
+sendHeightToHostingerSection(event.data.height[isMobileScreen() ? 1 : 0]); // Adjust based on your needs
+
     // Prevent immediate height reset
     window.heightSetByMessage = true;
     resetHeightSetByMessageFlag();
@@ -50,6 +53,3 @@ function sendHeightToHostingerSection(height) {
     console.log("Hostinger section not found.");
   }
 }
-
-// Trigger the height change
-sendHeightToHostingerSection(1700); // Adjust based on your needs
