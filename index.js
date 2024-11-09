@@ -9,7 +9,7 @@ function isMobileScreen() {
 // Set initial iframe height based on screen size
 function setIframeHeight() {
   const iframe = document.getElementById("iframe");
-  iframe.style.height = isMobileScreen() ? "2300px" : "1700px"; // Initial height for testing
+  iframe.style.height = isMobileScreen() ? "2300px" : "1600px"; // Initial height for testing
   console.log("Set iframe height");
 }
 
