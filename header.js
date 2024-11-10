@@ -1,4 +1,3 @@
-<script>
 window.addEventListener("message", function (event) {
 // Check if the message is for resizing the Hostinger section
 if (event.data.type === "resize-hostinger-section") {
@@ -11,4 +10,3 @@ console.log("Section with ID 'zQmwix' not found.");
 }
 }
 });
-</script>
