@@ -31,10 +31,10 @@ function resetHeightSetByMessageFlag() {
 window.addEventListener("message", function (event) {
   if (event.data.type === "resize-iframe") {
     const iframe = document.getElementById("iframe");
-    iframe.style.height = event.data.height[isMobileScreen() ? 1 : 0];
+    iframe.style.height = `${event.data.height[isMobileScreen() ? 1 : 0]}px`;
     console.log("Height updated from message");
     // Trigger the height change
-    sendHeightToHostingerSection(event.data.height[isMobileScreen() ? 1 : 0]); // Adjust based on your needs
+    sendHeightToHostingerSection(`${event.data.height[isMobileScreen() ? 1 : 0] + 10}px`); // Adjust based on your needs
     // Set flag to prevent immediate height reset
     heightSetByMessage = true;
     resetHeightSetByMessageFlag();
